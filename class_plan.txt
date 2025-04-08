@@ -1,0 +1,30 @@
+CLASS: Kmeans
+ATTRIBUTES:
+    * List[Cluster]
+    * dataframe
+    * k
+    * tolerance
+    * max_iters ?
+    * cols to cluster on
+METHODS:
+    * getClusters()
+    * printClusters()
+    * addDataPoint() -> NOT SURE IF THIS WILL BE NEEDED
+    * getRow(index) -> NOT SURE IF THIS WILL BE NEEDED
+    * plot(indcies to plot)
+    * predict(new row) -> assign a new data point to the closet cluster without retriaing 
+NOTES/THOUGHTS:
+    * data must be cleaned before hand
+    * On init need to specify which fields we will cluster over
+
+CLASS: Cluster
+ATTRIBUTES:
+    * List[data rows]
+    * centroid
+    * Error
+METHODS:
+    * addPoint()
+    * removePoint()
+    * updateCentroid()
+    * getCentroid()
+    * updated error
