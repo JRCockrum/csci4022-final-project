@@ -4,8 +4,8 @@ class Cluster:
     def __init__(self):
         # TODO: I'm not sure about some of these default values
         self._centroid = None
-        self._data = [] # list of rows(1D numpy arrays)
-        self._error = None # TODO might class this somthing else (e.g squared dist)
+        self._data = [] # list of indexes
+        self._error = None # TODO might call this somthing else (e.g squared dist)
 
     def add_row(self, row):
         self._data.append(row)
@@ -26,8 +26,7 @@ class Cluster:
             print(f"Row: {row}")
 
     def _update_centroid(self):
-        #TODO
-        pass
+        self._centroid = np.mean(self._data, axis=0) # Need to make sure we are not including the ticket ID in the centroid 
 
     def get_centroid(self):
         return self._centroid
