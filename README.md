@@ -23,4 +23,6 @@ By combing clustering with MinHash-based similarity search, we aim to imporve re
 TODO
 
 ## Data source
+https://www.kaggle.com/datasets/tobiasbueck/multilingual-customer-support-tickets
+
 https://www.kaggle.com/datasets/suraj520/customer-support-ticket-dataset
