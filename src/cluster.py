@@ -11,7 +11,7 @@ class Cluster:
 
     def add_row(self, row):
         self._data.append(row)
-        # self._update_centroid()
+        self._update_centroid()
         # self._update_error()
 
     def drop_row(self, row): # row: expected to be a 1D NumPy array
@@ -28,7 +28,13 @@ class Cluster:
             print(f"Row: {row}")
 
     def _update_centroid(self):
-        self._centroid = np.mean(self._data, axis=0) # Need to make sure we are not including the ticket ID in the centroid 
+        # if not self._data:
+        #     self._centroid = None
+        #     return
+        print("here")
+        # Get the actual rows from the parent KMeans object
+        rows = [self._kmeans.lookup_index(i).values for i in self._data]
+        self._centroid = np.mean(rows, axis=0)
 
     def get_centroid(self):
         return self._centroid
