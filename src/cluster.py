@@ -6,32 +6,28 @@ class Cluster:
         # TODO: I'm not sure about some of these default values
         self._centroid = None
         self._data =  [] # list of indexes
-        self._error = None # TODO might class this somthing else (e.g squared dist)
+        self._error = None # TODO might call this somthing else (e.g squared dist)
         self._kmeans = kmeans
 
     def add_row(self, row):
+        #TODO add check that row is not in data
         self._data.append(row)
         self._update_centroid()
-        # self._update_error()
+        self._update_error()
 
     def drop_row(self, row): # row: expected to be a 1D NumPy array
         try:
             self._data.remove(row)
-            if self._data:
-                self._update_centroid()
-                self._update_error()
-            else: # if cluster is empty
-                self._centroid = None
-                self._error = None
+            self._update_centroid()
+            self._update_error()
         except ValueError:
             print("Error: unable to remove row because it was not found in the cluster")
             print(f"Row: {row}")
 
     def _update_centroid(self):
-        # if not self._data:
-        #     self._centroid = None
-        #     return
-        print("here")
+        if not self._data:
+            self._centroid = None
+            return
         # Get the actual rows from the parent KMeans object
         rows = [self._kmeans.lookup_index(i).values for i in self._data]
         self._centroid = np.mean(rows, axis=0)
@@ -41,6 +37,9 @@ class Cluster:
     
     def _update_error(self):
         #TODO
+        if not self._data:
+            self._error = None
+            return
         pass
 
     def get_error(self):
