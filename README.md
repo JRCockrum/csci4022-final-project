@@ -1,5 +1,4 @@
-# Clustering & Recommendation  of IT Support Tickets
-TODO: NEED A BETTER TITLE
+# IT Support Ticket Clustering and Recommendation
 
 ### Contributers: Jackson Cockrum , Charlotte Hauke
 ### CSCI 4022 - Advanced Data Science Spring 2025
