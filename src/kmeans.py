@@ -1,6 +1,7 @@
 from cluster import Cluster
 import numpy as np
 import pandas as pd
+import random
 import matplotlib.pyplot as plt
 
 class Kmeans:
@@ -9,6 +10,11 @@ class Kmeans:
         self._clusters = [Cluster(self) for _ in range(k)]
         self._tol = tol
         self._error = 0
+
+        #Init Clusters with random datapoint
+        random_indices = random.sample(range(len(data)), k)
+        for cluster, idx in zip(self._clusters, random_indices):
+            cluster.add_row(idx)
 
 
     def get_clusters(self):
@@ -64,9 +70,11 @@ class Kmeans:
     def show_clusters(self):
         # TODO add ability to selext axes + title + labels
         plt.figure(figsize=(8, 6))
-        for cluster in self._clusters:
+        COLORS = ['red', 'blue', 'green', 'orange', 'purple', 'brown', 'pink', 'gray', 'olive', 'cyan']
+
+        for i, cluster in enumerate(self._clusters):
             x = [self.lookup_index(idx).values[0] for idx in cluster.get_data()]
             y = [self.lookup_index(idx).values[1] for idx in cluster.get_data()]
-            plt.scatter(x, y)
+            plt.scatter(x, y, color=COLORS[i])
         plt.show()
         

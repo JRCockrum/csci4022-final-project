@@ -50,3 +50,7 @@ class Cluster:
     
     def get_data(self):
         return self._data
+    
+    def has_row(self, row_num):
+        return row_num in self._data
+        
