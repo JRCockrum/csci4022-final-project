@@ -72,7 +72,7 @@ class Kmeans:
 
         
     def dist(self, num_x, num_y, cat_x, cat_y):
-        return 100*(1-self._a)*self._euc_dist(num_x,num_y) + 100*self._a*self._jac_dist(cat_x,cat_y)
+        return (1-self._a)*self._euc_dist(num_x,num_y) + self._a*self._jac_dist(cat_x,cat_y)
     
     def _euc_dist(self, x, y):
         return np.sqrt(sum((x_i-y_j)**2 for x_i, y_j in zip(x, y)))
@@ -95,8 +95,8 @@ class Kmeans:
         COLORS = ['red', 'blue', 'green', 'orange', 'purple', 'brown', 'pink', 'gray', 'olive', 'cyan']
 
         for i, cluster in enumerate(self._clusters):
-            x = [self.lookup_numeric(idx)[0] for idx in cluster.get_data()]
-            y = [self.lookup_numeric(idx)[1] for idx in cluster.get_data()]
+            x = [self.lookup_numeric(idx)[1] for idx in cluster.get_data()]
+            y = [self.lookup_numeric(idx)[0] for idx in cluster.get_data()]
             plt.scatter(x, y, color=COLORS[i])
         plt.show()
         
