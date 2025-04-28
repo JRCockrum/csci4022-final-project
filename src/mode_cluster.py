@@ -10,7 +10,8 @@ class Cluster:
         return self._centroid
 
     def get_data(self):
-        return self._data
+        row_vals = [self._kmodes.get_row(idx) for idx in self._data]
+        return pd.DataFrame(row_vals)
     
     def has_row(self, row_num):
         return row_num in self._data

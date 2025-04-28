@@ -1,24 +1,23 @@
 import pandas as pd
 import random
-import numpy as np
 from mode_cluster import Cluster
 
 class KModes:
-    def __init__(self, k: int, data: pd.DataFrame, tol=0.05):
+    def __init__(self, k: int, data: pd.DataFrame):
         self._data = data
         self._clusters = [Cluster(self) for _ in range(k)]
-        self._tol = tol
 
         # Random cluster init
         random_indices = random.sample(range(len(data)), k)
         for cluster, idx in zip(self._clusters, random_indices):
             cluster.add_row(idx)
+            cluster.update_centroid()
 
         # Clustering
         while True:
             clust_changes = 0
             for row_num in range(len(self._data)):
-                centroids = [clust.get_num_centroid() for clust in self._clusters]
+                centroids = self.get_centroids()
                 row_vals = self.get_row(row_num)
 
                 closest_cluster = 0
@@ -30,10 +29,11 @@ class KModes:
                         closest_cluster = clust_num
                         closest_dist = d
 
-                if not self._clusters[closest_cluster].has_row(clust_num):
-                    for clust in self._clusters:
-                        if clust.has_row(row_num):
-                            clust.drop_row(row_num)
+                if not self._clusters[closest_cluster].has_row(row_num):
+                    current_cluster = next((clust for clust in self._clusters if clust.has_row(row_num)), None)
+                    if current_cluster is not None:
+                        current_cluster.drop_row(row_num)
+
                     self._clusters[closest_cluster].add_row(row_num)
                     clust_changes += 1
             
@@ -50,7 +50,7 @@ class KModes:
 
     def get_row(self, index):
         try:
-            return self._data.loc[index, :].values
+            return self._data.iloc[index, :].values
         except IndexError as e:
             raise IndexError(f"Index {index} is out of bounds.") from e
         
