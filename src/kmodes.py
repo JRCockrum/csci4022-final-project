@@ -38,7 +38,7 @@ class KModes:
                     clust_changes += 1
             
             if clust_changes == 0:
-                return self.get_cost()
+                return
             else:
                 self._update_centroids()
 
@@ -57,7 +57,6 @@ class KModes:
     def get_cost(self):
         cost = 0
         for clust in self._clusters:
-            print(clust.get_cost())
             cost += clust.get_cost()
         return cost
         
