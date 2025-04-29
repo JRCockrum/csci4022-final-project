@@ -10,8 +10,7 @@ class Cluster:
         return self._centroid
 
     def get_data(self):
-        row_vals = [self._kmodes.get_row(idx) for idx in self._data]
-        return pd.DataFrame(row_vals, index=self._data)
+        return self._data
     
     def get_cost(self):
         cost = 0
