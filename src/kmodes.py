@@ -38,7 +38,7 @@ class KModes:
                     clust_changes += 1
             
             if clust_changes == 0:
-                return
+                return self.get_cost()
             else:
                 self._update_centroids()
 
@@ -53,6 +53,13 @@ class KModes:
             return self._data.iloc[index, :].values
         except IndexError as e:
             raise IndexError(f"Index {index} is out of bounds.") from e
+        
+    def get_cost(self):
+        cost = 0
+        for clust in self._clusters:
+            print(clust.get_cost())
+            cost += clust.get_cost()
+        return cost
         
     def _dist(self, x, y):
         diffs = 0

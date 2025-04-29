@@ -13,6 +13,12 @@ class Cluster:
         row_vals = [self._kmodes.get_row(idx) for idx in self._data]
         return pd.DataFrame(row_vals)
     
+    def get_cost(self):
+        cost = 0
+        row_vals =  [self._kmodes.get_row(idx) for idx in self._data]
+        for row in row_vals:
+            cost += self._kmodes._dist(self._centroid, row)
+    
     def has_row(self, row_num):
         return row_num in self._data
     
