@@ -19,9 +19,7 @@ By combing clustering with MinHash-based similarity search, we aim to imporve re
 
 
 ## Usage Instructions
-TODO
+All code for this project is contained in the `main.ipynb` notebook.
 
 ## Data source
 https://www.kaggle.com/datasets/tobiasbueck/multilingual-customer-support-tickets
-
-https://www.kaggle.com/datasets/suraj520/customer-support-ticket-dataset
